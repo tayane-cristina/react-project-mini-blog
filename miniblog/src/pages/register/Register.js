@@ -1,6 +1,8 @@
 import './Register.css'
 
+
 import { useState, useEffect } from 'react'
+import { useAuthenticator } from '../../hooks/useAuthenticator';
 
 const Register = ( ) => {
 
@@ -13,7 +15,9 @@ const Register = ( ) => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("")
 
-  const handleSubmit = (e) => {
+  const {error: authError, loading, createUser} = useAuthenticator();
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     setError("");
@@ -29,15 +33,12 @@ const Register = ( ) => {
     if (password !== confirmPassword) {
       setError("As senhas precisam ser iguais!")
       return 
+    } 
+      setSuccess("Seu cadastro foi realizado com sucesso!")
+      const res = await createUser(user)
+      console.log(res)
+      
     }
-
-    setSuccess("Seu cadastro foi realizado com sucesso!")
-    console.log(user)
-
-
-  }
-
-
 
   return (
     <div className='div-register'>
@@ -92,7 +93,8 @@ const Register = ( ) => {
         </label>
         <button className='btn-primary'>Cadastrar</button>
         {error && <p className='error'>{error}</p>}
-        {success && <p className='success'>{success}</p>}
+        {!error && !authError && <p className='success'>{success}</p>}
+        {authError && <p className='error'>{authError}</p>}
       </form>
     </div>
   );

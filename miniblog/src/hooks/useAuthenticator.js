@@ -1,9 +1,11 @@
+import {db} from '../firebase/config'
+
 import {
     getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     updateProfile,
-    singOut,
+    signOut,
 } from 'firebase/auth'
 
 import { useState, useEffect} from 'react'
@@ -24,4 +26,51 @@ export const useAuthenticator = () => {
             return;
         }
     }
-}
+
+    const createUser = async (data) => {
+        checkIfIsCancelled()
+
+        setLoading(true)
+        setError("")
+
+        try {
+            
+            const {user} = await createUserWithEmailAndPassword(
+                auth,
+                data.email,
+                data.password
+            )
+
+            await updateProfile(user, {
+                displayName: data.displayName
+            });
+
+            setLoading(false)
+
+            return user;
+            
+        } catch (error) {
+            console.log(error)
+            console.log(typeof error.message)
+
+            if (error.message.includes("Password")) {
+                setError("A senha deve ter um mínimo de 6 caracteres")
+            } else if (error.message.includes("email-already")) {
+                setError("Este email já está sendo utilizado")
+            } else {
+                setError("Ocorreu um erro, por favor tente mais tarde.")
+            };
+        };    
+    };
+    
+        useEffect(() => {
+            return () => setCancelled(true)
+        }, [])
+
+    return {
+        auth,
+        createUser,
+        loading,
+        error
+    };
+};
