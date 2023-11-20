@@ -91,7 +91,8 @@ const Register = ( ) => {
             onChange={({target}) => setConfirmPassword(target.value)}
           />
         </label>
-        <button className='btn-primary'>Cadastrar</button>
+        {loading && <button  className='btn-primary' disabled>carregando...</button>} 
+        {!loading && <button className='btn-primary'>Cadastrar</button>}
         {error && <p className='error'>{error}</p>}
         {!error && !authError && <p className='success'>{success}</p>}
         {authError && <p className='error'>{authError}</p>}
