@@ -1,0 +1,25 @@
+.navbar {
+    font-family: 'montserrat';
+    display: flex;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.308);
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px;
+    flex-wrap: wrap;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 40%;
+    font-family: 'montserrat';
+    flex-wrap: wrap;
+  }
+
+  .title {
+    font-size: 55px;
+    padding: 10px;
+    margin: 10px;
+    color: black;
+  }

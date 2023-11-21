@@ -7,9 +7,42 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/*Links style*/
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+a, .nav-btn, li {
+  text-decoration: none;
+  list-style: none;
+  border: none;
+  font-size: 22px;
+  background-color: white;
+  color: black;
+  font-family: 'montserrat';
+  cursor: pointer;
+  transition: 0.2s;
+  border-radius: 5px;
+}
+
+.nav-btn:hover,
+li:hover {
+  
+  background-color: black;
+  color: white;
+}
+
+.nav-btn:active,
+li:hover:active {
+  background-color: black;
+  color: white;
+}
+
+
+.special-link {
+  color: purple;
+  text-decoration: underline;
 }
 
 .error {

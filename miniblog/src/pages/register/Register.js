@@ -1,6 +1,4 @@
 import './Register.css'
-
-
 import { useState, useEffect } from 'react'
 import { useAuthenticator } from '../../hooks/useAuthenticator';
 
@@ -23,7 +21,6 @@ const Register = ( ) => {
     setError("");
     setSuccess("")
     
-
     const user = {
       displayName,
       email,
@@ -36,17 +33,14 @@ const Register = ( ) => {
     } 
       setSuccess("Seu cadastro foi realizado com sucesso!")
       const res = await createUser(user)
-      console.log(res)
-      
+      console.log(res);
     }
 
   return (
     <div className='div-register'>
       <h1>Cadastre-se</h1>
       <p>Crie seu usuário e compartilhe as suas histórias!</p>
-      
-
-
+    
       <form onSubmit={handleSubmit}>
         <label>
           <span>Nome:</span>
