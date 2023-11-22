@@ -86,9 +86,7 @@ export const useAuthenticator = () => {
 
         } catch (error) {
             if (error.message.includes("invalid-login")) {
-                setError("Usuário não encontrado")
-            } else if (error.message.includes("wrong-password")) {
-                setError("Senha incorreta")
+                setError("Email ou senha está incorreto")
             } 
             setLoading(false)
             console.log(error)
