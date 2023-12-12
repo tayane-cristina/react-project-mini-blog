@@ -25,7 +25,7 @@ export const useAuthenticator = () => {
         if (cancelled) {
             return;
         }
-    }
+    };
 
     //REGISTER
     const createUser = async (data) => {

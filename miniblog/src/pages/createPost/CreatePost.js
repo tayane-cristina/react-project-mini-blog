@@ -3,18 +3,33 @@ import './CreatePost.css'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthValue } from '../../components/context/AuthContext'
+import { useInsertDocument } from '../../hooks/useInsertDocument';
 
 const CreatePost = ( ) => {
   const [title, setTitle] = useState("");
   const [img, setImg] = useState("");
   const [body, setBody] = useState("");
   const [tags, setTags] = useState([]); 
-  const [formError, setError] = useState("");
+  const [formError, setFormError] = useState("");
+
+  const {insertDocument, response} = useInsertDocument('post');
+  const {user} = useAuthValue();
 
   const handleSubmit  = (e) => {
     e.preventDefault()
 
-  }
+    setFormError('')
+
+    insertDocument({
+      title,
+      img,
+      body,
+      tags,
+      uid: user.id,
+      createdBy: user.displayName
+    })
+
+  };
 
   return (
     <div className='div-create-post'>
@@ -65,7 +80,8 @@ const CreatePost = ( ) => {
           >
           </input> 
         </label>
-        {!formError && <button className='btn-primary'>ENVIAR</button>}
+        {!response.formError && <button className='btn-primary'>ENVIAR</button>}
+        {response.formError && <button className='btn-primary' disabled>ENVIAR</button>}
       </form>
     </div>
   );
